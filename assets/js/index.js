@@ -18,11 +18,33 @@ let urlVideo = "";
 let today = new Date().toISOString().split("T")[0];
 let linkSide = document.querySelectorAll("#linkSide");
 let linkSection = document.querySelectorAll("section");
+let planetDetailImage = document.getElementById("planet-detail-image");
+let planetDetailName = document.getElementById("planet-detail-name");
+let planetDetailDes = document.getElementById("planet-detail-description");
+let planetDistance = document.getElementById("planet-distance");
+let planetRadius = document.getElementById("planet-radius");
+let planetMass = document.getElementById("planet-mass");
+let planetDensity = document.getElementById("planet-density");
+let planetOrbitalPeriod = document.getElementById("planet-orbital-period");
+let planetRotation = document.getElementById("planet-rotation");
+let planetMoons = document.getElementById("planet-moons");
+let planetGravity = document.getElementById("planet-gravity");
+let planetDiscoverer = document.getElementById("planet-discoverer");
+let planetDiscoveryDate = document.getElementById("planet-discovery-date");
+let planetBodyType = document.getElementById("planet-body-type");
+let planetVolume = document.getElementById("planet-volume");
+let planetFacts = document.querySelectorAll("#planet-facts li span");
+let planetPerihelion = document.getElementById("planet-perihelion");
+let planetAphelion = document.getElementById("planet-aphelion");
+let planetAccentricity = document.getElementById("planet-eccentricity");
+let planetInclination = document.getElementById("planet-inclination");
+let planetAxialTilt = document.getElementById("planet-axial-tilt");
+let planetTemp = document.getElementById("planet-temp");
+let planetEscape = document.getElementById("planet-escape");
 
 for (let i = 0; i < linkSide.length; i++) {
   linkSide[i].addEventListener("click", function () {
     let link = linkSide[i].getAttribute("data-section");
-    linkSide[i].classList.add("active");
 
     for (let j = 0; j < linkSection.length; j++) {
       let section = linkSection[j].getAttribute("data-section");
@@ -197,11 +219,11 @@ function displaylaunches(data) {
                     >
                       <div class="flex items-center gap-2">
                         <i class="fas fa-building"></i>
-                        <span>${data.launch_service_provider.name}</span>
+                        <span>${data.launch_service_provider?.name}</span>
                       </div>
                       <div class="flex items-center gap-2">
                         <i class="fas fa-rocket"></i>
-                        <span>${data.rocket.configuration.name}</span>
+                        <span>${data.rocket.configuration?.name}</span>
                       </div>
                     </div>
                    ${
@@ -244,7 +266,7 @@ function displaylaunches(data) {
                           <i class="fas fa-map-marker-alt"></i>
                           Location
                         </p>
-                        <p class="font-semibold text-sm">${data.pad.location.name}</p>
+                        <p class="font-semibold text-sm">${data.pad.location?.name}</p>
                       </div>
                       <div class="bg-slate-900/50 rounded-xl p-4">
                         <p
@@ -313,8 +335,7 @@ async function upcomingAlllaunches() {
     if (launche.ok) {
       let response = await launche.json();
       let arr = response.results;
-        console.log(arr);
-        
+
       displayAlllaunches(arr);
     } else {
       let error = await launche.json();
@@ -330,7 +351,6 @@ function displayAlllaunches(data) {
 
   for (let i = 1; i < data.length; i++) {
     let allRocket = data[i];
-    let status = i === 1 ? "GO" : "TBD";
     let newDate = new Date(allRocket.net);
     let currentDate = newDate.toLocaleDateString("en-US", { timeZone: "UTC" });
     let currentTime = newDate.toLocaleTimeString("en-US", {
@@ -355,7 +375,7 @@ function displayAlllaunches(data) {
                   <span
                     class="px-3 py-1 bg-green-500/90 text-white backdrop-blur-sm rounded-full text-xs font-semibold"
                   >
-                    ${status}
+                    ${allRocket.status.abbrev}
                    
                   </span>
                 </div>
@@ -411,29 +431,7 @@ function displayAlllaunches(data) {
   document.getElementById("launches-grid").innerHTML = boxTwo;
 }
 
-let planetDetailImage = document.getElementById("planet-detail-image");
-let planetDetailName = document.getElementById("planet-detail-name");
-let planetDetailDes = document.getElementById("planet-detail-description");
-let planetDistance = document.getElementById("planet-distance");
-let planetRadius = document.getElementById("planet-radius");
-let planetMass = document.getElementById("planet-mass");
-let planetDensity = document.getElementById("planet-density");
-let planetOrbitalPeriod = document.getElementById("planet-orbital-period");
-let planetRotation = document.getElementById("planet-rotation");
-let planetMoons = document.getElementById("planet-moons");
-let planetGravity = document.getElementById("planet-gravity");
-let planetDiscoverer = document.getElementById("planet-discoverer");
-let planetDiscoveryDate = document.getElementById("planet-discovery-date");
-let planetBodyType = document.getElementById("planet-body-type");
-let planetVolume = document.getElementById("planet-volume");
-let planetFacts = document.querySelectorAll("#planet-facts li span");
-let planetPerihelion = document.getElementById("planet-perihelion");
-let planetAphelion = document.getElementById("planet-aphelion");
-let planetAccentricity = document.getElementById("planet-eccentricity");
-let planetInclination = document.getElementById("planet-inclination");
-let planetAxialTilt = document.getElementById("planet-axial-tilt");
-let planetTemp = document.getElementById("planet-temp");
-let planetEscape = document.getElementById("planet-escape");
+
 
 solarSystem();
 
@@ -455,7 +453,6 @@ async function solarSystem() {
 }
 
 function displayPlanetCard(arr) {
-  console.log(arr);
   let planets = "";
   let table = "";
 
@@ -511,7 +508,7 @@ function displayPlanetCard(arr) {
           planetRotation.innerHTML = `${arr[j].sideralRotation.toFixed(2)} hours`;
 
           planetMoons.innerHTML = arr[j].moons ? arr[j].moons.length : 0;
-          planetGravity.innerHTML = `${arr[j].gravity.toFixed(2)} m/s²`;
+
           planetDiscoverer.innerHTML =
             arr[j].discoveredBy || "Known since antiquity";
 
