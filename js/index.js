@@ -189,7 +189,11 @@ async function upcominglaunches() {
 function displaylaunches(data) {
   let newDate = new Date(data.net);
   let now = new Date();
-  let launchDate = Math.ceil(newDate - now) / (1000 * 60 * 60 * 24);
+  let launchDate = Math.ceil((newDate - now) / (1000 * 60 * 60 * 24));
+  let launchText = '';
+  if (launchDate > 0) {
+    launchText = launchDate === 1 ? "1 Day" : `${launchDate} Days`;
+  }
   let currentDate = newDate.toLocaleDateString("en-US", { timeZone: "UTC" });
   let currentTime = newDate.toLocaleTimeString("en-US", {
     hour: "2-digit",
@@ -242,7 +246,7 @@ function displaylaunches(data) {
                       <i class="fas fa-clock text-2xl text-blue-400"></i>
                     
                       <div>
-                        <p class="text-2xl font-bold text-blue-400">${launchDate}</p>
+                        <p class="text-2xl font-bold text-blue-400">${launchText}</p>
                         <p class="text-xs text-slate-400">Days Until Launch</p>
                       </div>
                     </div>`
