@@ -41,6 +41,14 @@ let planetInclination = document.getElementById("planet-inclination");
 let planetAxialTilt = document.getElementById("planet-axial-tilt");
 let planetTemp = document.getElementById("planet-temp");
 let planetEscape = document.getElementById("planet-escape");
+let navLinks = document.querySelectorAll(".nav-link");
+navLinks.forEach((link) => {
+  link.addEventListener("click", function () {
+    navLinks.forEach((e) => e.classList.remove("active"));
+
+    link.classList.add("active");
+  });
+});
 
 for (let i = 0; i < linkSide.length; i++) {
   linkSide[i].addEventListener("click", function () {
@@ -430,8 +438,6 @@ function displayAlllaunches(data) {
 
   document.getElementById("launches-grid").innerHTML = boxTwo;
 }
-
-
 
 solarSystem();
 
