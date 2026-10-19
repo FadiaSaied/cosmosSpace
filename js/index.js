@@ -75,7 +75,7 @@ async function todayInSpace() {
   apodvideo.classList.add("hidden");
   try {
     let infoToday = await fetch(
-      `https://api.nasa.gov/planetary/apod?api_key=Cnx9BxGcvS3GJcbSyEzI7aqrfKZC14dlN8W0by1d`,
+      `https://api.nasa.gov/planetary/apod?api_key=e0krN8UPZiLSKTs4kd95uIi3EkgWjCqDEJdT1G8T`,
     );
     if (infoToday.ok) {
       let response = await infoToday.json();
@@ -149,7 +149,7 @@ async function spaceByDate(chooseDate) {
   apodvideo.classList.add("hidden");
   try {
     let dateInfo = await fetch(
-      `https://api.nasa.gov/planetary/apod?api_key=Cnx9BxGcvS3GJcbSyEzI7aqrfKZC14dlN8W0by1d&date=${chooseDate}`,
+      `https://api.nasa.gov/planetary/apod?api_key=e0krN8UPZiLSKTs4kd95uIi3EkgWjCqDEJdT1G8T&date=${chooseDate}`,
     );
     if (dateInfo.ok) {
       let response = await dateInfo.json();
