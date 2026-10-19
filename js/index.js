@@ -75,7 +75,7 @@ async function todayInSpace() {
   apodvideo.classList.add("hidden");
   try {
     let infoToday = await fetch(
-      `https://api.nasa.gov/planetary/apod?api_key=jAtH8pga0tOFEWDHMqKUZ1ADPMGfdHreemN7oWJf`,
+      `https://api.nasa.gov/planetary/apod?api_key=Cnx9BxGcvS3GJcbSyEzI7aqrfKZC14dlN8W0by1d`,
     );
     if (infoToday.ok) {
       let response = await infoToday.json();
@@ -149,7 +149,7 @@ async function spaceByDate(chooseDate) {
   apodvideo.classList.add("hidden");
   try {
     let dateInfo = await fetch(
-      `https://api.nasa.gov/planetary/apod?api_key=jAtH8pga0tOFEWDHMqKUZ1ADPMGfdHreemN7oWJf&date=${chooseDate}`,
+      `https://api.nasa.gov/planetary/apod?api_key=Cnx9BxGcvS3GJcbSyEzI7aqrfKZC14dlN8W0by1d&date=${chooseDate}`,
     );
     if (dateInfo.ok) {
       let response = await dateInfo.json();
@@ -190,7 +190,7 @@ function displaylaunches(data) {
   let newDate = new Date(data.net);
   let now = new Date();
   let launchDate = Math.ceil((newDate - now) / (1000 * 60 * 60 * 24));
-  let launchText = '';
+  let launchText = "";
   if (launchDate > 0) {
     launchText = launchDate === 1 ? "1 Day" : `${launchDate} Days`;
   }
